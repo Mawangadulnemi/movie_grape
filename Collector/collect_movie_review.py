@@ -89,8 +89,8 @@ review_list=doc.select("ul.list_comment div.cmt_info")
 for review_box in review_list:
     score=review_box.select("div.ratings")
     print(f"- 평점:{score}")
-    writer=review_box.select("")
-    review = review_box.select("")
-    review_date = review_box.select("")
+    writer=review_box.select("span#data-reactid")
+    review = review_box.select("p.desc_text")
+    review_date = review_box.select("span.txt_date")
 
 # 숙제: 리뷰, 작성자, 작성일자 수집
