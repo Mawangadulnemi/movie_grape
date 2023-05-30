@@ -8,6 +8,7 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
+from db.movie_crud import add_review
 
 # anaconda prompt
 # > conda activate cnu_python
@@ -101,12 +102,21 @@ for i,review_box in enumerate(review_list):
 
     review_date = review_box.select("span.txt_date")[0].text
     print(f"={i+1}===========================================")
-    print(f"review: {review}")
+    print(f"리뷰: {review}")
     print(f"평점:{score}")
     print(f"작성자: {writer}")
-    print(f"Writing Day: {review_date}")
+    print(f"작성일: {review_date}")
 
-
+    # MongoDB 저장
+    # - JSON type(Dict) 전달
+    data={
+        "title":title,
+        "review":review,
+        "score":score,
+        "writer": writer,
+        "regdate":review_date
+    }
+    add_review(data)
 
 # Report
 print("#"*30)
@@ -118,4 +128,5 @@ if len(empty_list)>0:
     print(f"    + {empty_list}")
 print(f"  - Reviews collected: {total_review - empty_cnt}")
 print("#"*30)
+
 
