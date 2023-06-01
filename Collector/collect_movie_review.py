@@ -96,6 +96,7 @@ for i,review_box in enumerate(review_list):
         empty_list.append(i+1)  # empty review number
     else:
         review = review_box.select("p.desc_txt")[0].text.strip()
+
     score=review_box.select("div.ratings")[0].text
     # writer = review_box.select("a.link_nick > span")[1].text
     writer = review_box.select("a span[data-reactid]")[1].text
